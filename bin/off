@@ -1,0 +1,45 @@
+#!/usr/bin/env ruby
+
+require 'offliberty'
+
+def help
+  puts "\nSimple CLI App for offliberty.com download service"
+  puts "\nUSAGE:"
+  puts "  $ off <youtube-link>            - Download song in current directory"
+  puts "  $ off <file-with-youtube-links> - Download all songs from file to current directory"
+  puts "\n"
+end
+
+def is_url? url
+   reg = /^https?:\/\//
+   url.match(reg)
+end
+
+if ARGV.length != 1
+  help
+else
+  arg = ARGV.pop
+
+  if is_url?(arg)
+    puts "Requesting..."
+    song = Offliberty::Off.new(arg)
+    puts "Downloading..."
+    song.download
+  elsif File.exist?(arg)
+    f = File.open(arg, "r")
+
+    f.each_line do |link|
+      if is_url?(link)
+        puts "Requesting..."
+        song = Offliberty::Off.new(link) 
+        puts "Downloading..."
+        song.download
+        puts "Finished!"
+      end
+    end
+
+    f.close
+  else
+    help
+  end
+end

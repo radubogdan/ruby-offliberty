@@ -20,12 +20,36 @@ Or install it yourself as:
 
 ## Usage
 
+### From ruby
+
 ```ruby
 require 'offliberty'
 
 song = Offliberty::Off.new("https://www.youtube.com/watch?v=A4GhUglZ5NU")
 song.offliberate # Get the download link
 song.download # Download the song near this ruby script
+```
+
+### From terminal
+
+```sh
+$ off https://www.youtube.com/watch?v=A4GhUglZ5NU
+```
+
+Or with a textfile with multiple links
+```sh
+$ cat example
+https://www.youtube.com/watch?v=uiGpv-UeiDI
+not link
+https://www.youtube.com/watch?v=oHowqKYSXNI
+random text
+$ off example
+Requesting...
+Downloading...
+Finished!
+Requesting...
+Downloading...
+Finished!
 ```
 
 ## Contributing
