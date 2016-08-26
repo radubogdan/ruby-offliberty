@@ -7,7 +7,7 @@ module Offliberty
     def initialize song_url
       @page = Offliberty::Helpers::Connection.new(song_url)
     end
-    
+
     def offliberate
       res = @page.form.submit
       song_url = res.links.fetch(0).href

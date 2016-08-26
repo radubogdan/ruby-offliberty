@@ -31,7 +31,7 @@ else
     f.each_line do |link|
       if is_url?(link)
         puts "Requesting..."
-        song = Offliberty::Off.new(link) 
+        song = Offliberty::Off.new(link)
         puts "Downloading..."
         song.download
         puts "Finished!"
